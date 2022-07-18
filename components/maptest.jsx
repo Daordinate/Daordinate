@@ -1,20 +1,25 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '4000px',
-  height: '4000px'
+  width: '1100px',
+  height: '700px'
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523
+var center = {
+  lat: 48.85,
+  lng: 2.35
 };
+
+var position ={
+    lat:m,
+    lng:null
+}
 
 function MyComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "YOUR_API_KEY"
+    googleMapsApiKey: "AIzaSyAIJx9hwjxcmt2-VjyW5MCxwPqlVvTW51w"
   })
 
   const [map, setMap] = React.useState(null)
@@ -33,12 +38,22 @@ function MyComponent() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={4}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        onClick={ev => {
+            console.log("latitide = ", ev.latLng.lat());
+            console.log("longitude = ", ev.latLng.lng());
+            //position.lat=ev.latLng.lat();
+            //position.lng=ev.latLng.lng();
+            //position.lat=48.85;
+            //position.lng=2.35;
+          }}
       >
         { /* Child components, such as markers, info windows, etc. */ }
-        <></>
+        <><Marker
+      position={position}
+    /></>
       </GoogleMap>
   ) : <></>
 }
