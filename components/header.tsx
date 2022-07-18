@@ -2,6 +2,9 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { connect, getStarknet } from "get-starknet";
+import {useState} from 'react';
+
 
 const user = {
   name: 'Tom Cook',
@@ -26,6 +29,27 @@ function classNames(...classes : any) {
 }
 
 export const AppHeader=() => {
+
+  const [isConnected, setIsConnected] = useState(false);
+
+
+  async function connectWallet() {
+    try {
+        const wallet = await connect({
+            include: ["braavos"],
+        });
+        if (wallet) {
+            await wallet.enable({ showModal: true });
+            setIsConnected(!!wallet?.isConnected);
+        }
+        const wallet2 = getStarknet();
+
+        const address = wallet2.account.address;
+        console.log(address);
+    } catch {
+        console.log("Connect Wallet")
+    }
+}
   return (
     <>
       {/*
@@ -77,6 +101,7 @@ export const AppHeader=() => {
                   <button
                     type="button"
                     className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={connectWallet}
                 >
                     Connect Wallet
                 </button>

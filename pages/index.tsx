@@ -5,6 +5,9 @@ import { AppHeader } from '../components/header'
 import { Map } from '../components/map'
 
 const Home: NextPage = () => {
+
+
+  
   return (
     <div>
       <AppHeader/>

@@ -9,12 +9,13 @@
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@react-google-maps/api": "^2.12.1",
+    "get-starknet": "^1.4.2",
     "google-maps-react": "^2.0.6",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "snarkjs": "^0.4.22"
-
+    "snarkjs": "^0.4.22",
+    "starknet": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

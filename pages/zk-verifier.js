@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState} from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { providers, Contract, utils} from 'ethers';
 const snarkjs = require('snarkjs');
@@ -12,6 +13,8 @@ export default function IndexPage() {
     proof: "",
     publicSignals: "",
   })
+
+ 
 
   let handleCalcProof = () => {
     calculateProof(state, setState);
