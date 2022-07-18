@@ -10,8 +10,7 @@ const Home: NextPage = () => {
   
   return (
     <div>
-      <AppHeader/>
-      <h1>Hello Zk Dapp</h1>
+
       <Map/>
     </div>
   )

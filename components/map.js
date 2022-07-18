@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { providers, Contract, utils} from 'ethers';
 const snarkjs = require('snarkjs');
 import { connect, getStarknet } from "get-starknet";
+import Link from 'next/link'
 
 
 
@@ -23,6 +24,7 @@ export const Map=() => {
     const [currentLong,setCurrentLong] = useState();  
     const [mainProof ,setMainProof] = useState();
     const [mainPublicSignals,setMainPublicSignals] = useState();
+    const [isVerified,setIsVerified] = useState(false);
 
 
     async function connectWallet() {
@@ -237,8 +239,28 @@ export const Map=() => {
         >
         Verify Proof
       </button>     
+      <NextButton isVerified={isVerified}/>
+
+      
       
     </>
   )
+}
+
+function NextButton(){
+    if(isVerified){
+        return <>
+            <Link href="/select-nft">
+                <button
+                    type="button"
+                    className="ml-10 mt-10 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    
+                >
+                Next
+                </button>     
+            </Link>
+        </>
+    }
+    
 }
 

@@ -14,7 +14,7 @@ const user = {
 }
 const navigation = [
   { name: 'Map', href: '#', current: true },
-  { name: 'Find Colleagues', href: '#', current: false },
+  { name: 'Find Friends', href: '#', current: false },
   { name: 'Your Locations', href: '#', current: false },
   
 ]
@@ -49,19 +49,20 @@ export const AppHeader=() => {
     } catch {
         console.log("Connect Wallet")
     }
+
+    const options = {method: 'GET', headers: {Accept: 'application/json'}};
+
+    fetch('https://api-testnet.aspect.co/api/v0/assets?owner_address=0x459be245cab626bc30c064a15586b2c06a3ab981a1ddf2e2cd9463e57ba9c8d', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+      
 }
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
-      <div className="min-h-full">
-        <Disclosure as="nav" className="bg-white border-b border-gray-200">
+      
+      <div className="min-h-full pt-5">
+        <Disclosure as="nav" className="bg-white border-b border-gray-200 pb-5">
           {({ open }) => (
             <>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
