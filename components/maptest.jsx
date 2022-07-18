@@ -12,7 +12,7 @@ var center = {
 };
 
 var position ={
-    lat:m,
+    lat:null,
     lng:null
 }
 
