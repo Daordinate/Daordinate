@@ -2,6 +2,7 @@ import { CreditCardIcon, KeyIcon, UserCircleIcon, UserGroupIcon, ViewGridAddIcon
 import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import { connect, getStarknet } from "get-starknet";
+import Link from 'next/link'
 
 const navigation = [
   { name: 'NFT', href: '#', icon: UserCircleIcon, current: true },
@@ -122,9 +123,9 @@ export default function SelectNfts() {
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor="comments" className="font-medium text-gray-700">
-                        NFT Group 1
+                        Encode StarkWare Paris 2022
                       </label>
-                      <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                      <p className="text-gray-500">Share your Proof of Location with ESP22 Holders</p>
                     </div>
                   </div>
                   <div>
@@ -138,9 +139,9 @@ export default function SelectNfts() {
                       </div>
                       <div className="ml-3 text-sm">
                         <label htmlFor="candidates" className="font-medium text-gray-700">
-                          NFT Group 2
+                          Encode ZK Bootcamp 2022
                         </label>
-                        <p className="text-gray-500">Get notified when a candidate applies for a job.</p>
+                        <p className="text-gray-500">Share your Proof of Location with EZKB22 Holders</p>
                       </div>
                     </div>
                   </div>
@@ -156,9 +157,9 @@ export default function SelectNfts() {
                       </div>
                       <div className="ml-3 text-sm">
                         <label htmlFor="offers" className="font-medium text-gray-700">
-                          NFT Group 3
+                          StarkCC 2022
                         </label>
-                        <p className="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
+                        <p className="text-gray-500">Share your Proof of Location with STRKCC22 Holders</p>
                       </div>
                     </div>
                   </div>
@@ -167,19 +168,14 @@ export default function SelectNfts() {
              
             </div>
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <button
-                
-                className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-              >
-                Save
-              </button>
+              <Link href="/location-list">
               <button
                 className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                 onClick={showData}
               >
-                Show Data
+                Share Location Proofs
               </button>
-
+              </Link>
             </div>
           </div>
    
