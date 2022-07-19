@@ -119,23 +119,23 @@ function MyComponent() {
 
 
 
-  async function connectWallet() {
-      try {
-          const wallet = await connect({
-              include: ["braavos"],
-          });
-          if (wallet) {
-              await wallet.enable({ showModal: true });
-              setIsConnected(!!wallet?.isConnected);
-          }
-          const wallet2 = getStarknet();
+//   async function connectWallet() {
+//       try {
+//           const wallet = await connect({
+//               include: ["braavos"],
+//           });
+//           if (wallet) {
+//               await wallet.enable({ showModal: true });
+//               setIsConnected(!!wallet?.isConnected);
+//           }
+//           const wallet2 = getStarknet();
 
-          const address = wallet2.account.address;
-          console.log(address);
-      } catch {
-          console.log("Connect Wallet")
-      }
-  }
+//           const address = wallet2.account.address;
+//           console.log(address);
+//       } catch {
+//           console.log("Connect Wallet")
+//       }
+//   }
   
   
   
@@ -186,9 +186,8 @@ function MyComponent() {
     
       const verified = await snarkjs.plonk.verify(vkey, mainPublicSignals, mainProof);
     
-      // console.log(verified)
+      console.log(`Proof Verification Result: ${verified}`);
       setIsVerified(verified)
-      
     
     }
     
@@ -239,7 +238,7 @@ function MyComponent() {
   }
 
   return (
-  <div className="flex justify-evenly mt-5">
+  <div className="flex justify-evenly mt-5 pl-30 pr-30">
 
     {isLoaded ? (
       <GoogleMap
@@ -247,9 +246,9 @@ function MyComponent() {
       onUnmount={onUnmount}
         onClick={ev => {
           setMinLat(ev.latLng.lat());
-          setMaxLat(ev.latLng.lat()+1);
+          setMaxLat(ev.latLng.lat()+1.5);
           setMinLong(ev.latLng.lng());
-          setMaxLong(ev.latLng.lng()+1);
+          setMaxLong(ev.latLng.lng()+1.5);
 
           
           () => setActiveMarker(null)

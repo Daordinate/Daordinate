@@ -29,7 +29,7 @@ import {group3Data} from "./data/group3"
                   <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                        NFT 1 - Shared Date                      </th>
+                      ESP22 Holders - Shared Location Proofs                     </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Date
                       </th>
@@ -94,7 +94,7 @@ import {group3Data} from "./data/group3"
                   <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                        NFT 1 - Shared Date                      </th>
+                      EZKB22 Holders - Shared Location Proofs                      </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Date
                       </th>
@@ -159,7 +159,7 @@ import {group3Data} from "./data/group3"
                   <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                        NFT 1 - Shared Date                      </th>
+                      STRKCC22 Holders - Shared Location Proofs                      </th>
                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         Date
                       </th>

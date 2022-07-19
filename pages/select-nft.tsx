@@ -116,7 +116,7 @@ export default function SelectNfts() {
                     <div className="h-5 flex items-center">
                       <input
                         type="checkbox"
-                        value="NFT 1"
+                        value="Encode StarkWare Paris 2022"
                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                         onChange={(e)=> console.log(e.target.value)}
                       />
@@ -133,6 +133,7 @@ export default function SelectNfts() {
                       <div className="h-5 flex items-center">
                         <input
                           type="checkbox"
+                          value="Encode ZK Bootcamp 2022"
                           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                           onChange={(e)=> console.log(e.target.value)}
                         />
@@ -149,7 +150,7 @@ export default function SelectNfts() {
                     <div className="flex items-start">
                       <div className="h-5 flex items-center">
                         <input
-                          value="NFT 3"
+                          value="StarkCC 2022"
                           type="checkbox"
                           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                           onChange={(e)=> console.log(e.target.value)}
