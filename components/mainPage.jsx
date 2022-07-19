@@ -6,6 +6,7 @@ import { connect, getStarknet } from "get-starknet";
 import Link from 'next/link'
 import MapComponent from './maptest.jsx';
 import Router from 'next/router'
+import {nftData} from "./data/nftData"
 
 
 const statsLat = [
@@ -39,12 +40,12 @@ function MyComponent() {
   const [isConnected, setIsConnected] = useState();
 
 
-  const [minLat,setMinLat] = useState(100);
-  const [maxLat,setMaxLat] = useState(150);
-  const [minLong,setMinLong] = useState(100);
-  const [maxLong,setMaxLong] = useState(150);
-  const [currentLat,setCurrentLat] = useState(120);  
-  const [currentLong,setCurrentLong] = useState(140);  
+  const [minLat,setMinLat] = useState(0);
+  const [maxLat,setMaxLat] = useState(0);
+  const [minLong,setMinLong] = useState(0);
+  const [maxLong,setMaxLong] = useState(0);
+  const [currentLat,setCurrentLat] = useState(0);  
+  const [currentLong,setCurrentLong] = useState(0);  
   const [mainProof ,setMainProof] = useState();
   const [mainPublicSignals,setMainPublicSignals] = useState();
   const [isVerified,setIsVerified] = useState(false);
@@ -204,14 +205,17 @@ function MyComponent() {
               lat: loc.coords.latitude,
               long: loc.coords.longitude
           })
-          console.log("Locations")
-          console.log(location)
+         
     
 
           const lat =loc.coords.latitude;
           const long = loc.coords.longitude;
           setCurrentLat(lat)
           setCurrentLong(long)
+          console.log("Latitude")
+          console.log(lat)
+          console.log("Longitude")
+          console.log(long)
 
       }
 
@@ -246,9 +250,9 @@ function MyComponent() {
       onUnmount={onUnmount}
         onClick={ev => {
           setMinLat(ev.latLng.lat());
-          setMaxLat(ev.latLng.lat()+1.5);
+          setMaxLat(ev.latLng.lat()+0.5);
           setMinLong(ev.latLng.lng());
-          setMaxLong(ev.latLng.lng()+1.5);
+          setMaxLong(ev.latLng.lng()+0.5);
 
           
           () => setActiveMarker(null)

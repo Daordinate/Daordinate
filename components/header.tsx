@@ -4,6 +4,11 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { connect, getStarknet } from "get-starknet";
 import {useState ,useEffect} from 'react';
+// import myLogo from './images/logo.png'
+import {nftData} from "./data/nftData"
+
+
+
 
 
 const navigation = [
@@ -16,6 +21,8 @@ function classNames(...classes : any) {
 }
 
 export const AppHeader=() => {
+
+  const addressNftData = nftData;
 
   const [isConnected, setIsConnected] = useState(false);
   const [walletAddress,setWalletAddress] =useState<any>();
@@ -34,6 +41,7 @@ export const AppHeader=() => {
 
         const address = wallet2.account.address;
         console.log(address);
+        console.log(addressNftData);
         setWalletAddress(address);
     } catch {
         console.log("Connect Wallet")
@@ -83,11 +91,11 @@ useEffect(() => {
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         alt="Workflow"
                       /> */}
-                      <img
+                      {/* <img
                         className="hidden lg:block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                        alt="Workflow"
-                      />
+                        src="./images/logo.png"
+                      /> */}
+                      <h3 className="font-bold text-xl">Daordinate</h3>
                     </div>
                     <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                       {navigation.map((item) => (
