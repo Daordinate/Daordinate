@@ -31,6 +31,7 @@ function classNames(...classes : any) {
 export const AppHeader=() => {
 
   const [isConnected, setIsConnected] = useState(false);
+  const [walletAddress,setWalletAddress] =useState<any>();
 
 
   async function connectWallet() {
@@ -46,6 +47,7 @@ export const AppHeader=() => {
 
         const address = wallet2.account.address;
         console.log(address);
+        setWalletAddress(address);
     } catch {
         console.log("Connect Wallet")
     }
@@ -99,13 +101,23 @@ export const AppHeader=() => {
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                  <button
+                  { walletAddress ? <button
                     type="button"
                     className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={connectWallet}
-                >
+                    >
+                    Connected
+                    </button> :
+                    <button
+                    type="button"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={connectWallet}
+                    >
                     Connect Wallet
-                </button>
+                    </button>
+
+                  }
+                  
 
                     {/* Profile dropdown */}
                   

@@ -5,6 +5,7 @@ import { providers, Contract, utils} from 'ethers';
 const snarkjs = require('snarkjs');
 import { connect, getStarknet } from "get-starknet";
 import Link from 'next/link'
+import MapComponent from './maptest.jsx';
 
 
 
@@ -13,7 +14,7 @@ export const Map=() => {
     //     googleMapsApiKey: "AIzaSyAIJx9hwjxcmt2-VjyW5MCxwPqlVvTW51w",
     // });
 
-    const [isConnected, setIsConnected] = useState(false);
+    const [isConnected, setIsConnected] = useState();
 
 
     const [minLat,setMinLat] = useState();
@@ -124,21 +125,21 @@ export const Map=() => {
    
     }
 
+    function NextButton(){
+        
+        
+    }
+
 
 
   return (
-    <>
-      <h1> Map</h1>
-      <button
-            type="button"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={getLocation}
-        >
-        Get Location
-      </button>
-    <div className="flex">
+    <div className="flex inline-flex">
+      <MapComponent/>
+
+     
+    <div className="flex flex-col">
          <div>
-      <label className="ml-10 mt-10 block font-medium text-gray-700">
+      <label className="ml-10 mt-10 block font-medium text-gray-700 ">
         Min Latitude
       </label>
         <div className="ml-10 mt-1 relative">
@@ -163,7 +164,10 @@ export const Map=() => {
         </div>
       </div>
     </div>
-    <div className="flex">
+
+
+
+    <div className="flex flex-col">
          <div>
       <label className="ml-10 mt-10 block font-medium text-gray-700">
         Min Longitude
@@ -190,6 +194,8 @@ export const Map=() => {
         </div>
       </div>
     </div>
+
+    
     <div className="flex">
          <div>
       <label className="ml-10 mt-10 block font-medium text-gray-700">
@@ -238,29 +244,35 @@ export const Map=() => {
             onClick={verifyProof}
         >
         Verify Proof
-      </button>     
-      <NextButton isVerified={isVerified}/>
+      </button>
+      {
+        isVerified ? <Link href="/select-nft">
+                    <button
+                        type="button"
+                        className="ml-10 mt-10 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        
+                    >
+                    Next
+                    </button>     
+                </Link> : null
+
+    }
+
+    <button
+            type="button"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={getLocation}
+        >
+        Get Location
+      </button>
+      
+ 
 
       
       
-    </>
+    </div>
   )
 }
 
-function NextButton(){
-    if(isVerified){
-        return <>
-            <Link href="/select-nft">
-                <button
-                    type="button"
-                    className="ml-10 mt-10 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    
-                >
-                Next
-                </button>     
-            </Link>
-        </>
-    }
-    
-}
+
 

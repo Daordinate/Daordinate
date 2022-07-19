@@ -6,24 +6,10 @@ import { connect, getStarknet } from "get-starknet";
 import Link from 'next/link'
 import MapComponent from './maptest.jsx';
 
-const statsLat = [
-  { name: 'Min Longitude', stat: 100},
-  { name: 'Max Longitude', stat: 150 },
-]
-
-const statsLong = [
-  { name: 'Total Subscribers', stat: '71,897' },
-  { name: 'Avg. Open Rate', stat: '58.16%' },
-]
-
-const statsCurrent = [
-  { name: 'Total Subscribers', stat: '71,897' },
-  { name: 'Avg. Open Rate', stat: '58.16%' },
-]
 
 const containerStyle = {
   width: '1100px',
-  height: '700px'
+  height: '900px'
 };
 
 var center = {
@@ -41,9 +27,9 @@ function MyComponent() {
   const [isConnected, setIsConnected] = useState();
 
 
-  const [minLat,setMinLat] = useState(100);
+  const [minLat,setMinLat] = useState(0);
   const [maxLat,setMaxLat] = useState(150);
-  const [minLong,setMinLong] = useState(100);
+  const [minLong,setMinLong] = useState(0);
   const [maxLong,setMaxLong] = useState(150);
   const [currentLat,setCurrentLat] = useState(120);  
   const [currentLong,setCurrentLong] = useState(140);  
@@ -117,11 +103,10 @@ function MyComponent() {
       try {
     
         let {proof, publicSignals} = await snarkjs.plonk.fullProve(input, wasmBuff, zkeyBuff);
-        
+        console.log("Generated Proof")
+        console.log(proof)
         setMainProof(proof);
         setMainPublicSignals(publicSignals);
-        console.log(mainProof);
-        console.log(mainPublicSignals);
     
       //   setState({...state, proof:proof, publicSignals:publicSignals})
     
@@ -136,8 +121,11 @@ function MyComponent() {
       let vkey = await fetch (`http://localhost:3000/inRange_verification_key.json`).then(res => res.json());
     
       const verified = await snarkjs.plonk.verify(vkey, mainPublicSignals, mainProof);
-    
-      console.log(verified)
+      
+      console.log(`Proof Verification Result :${verified}`)
+      if(verified){
+        setIsVerified(true)
+      }
     
     }
     
@@ -155,8 +143,12 @@ function MyComponent() {
               long: loc.coords.longitude
           })
           console.log("Locations")
-          console.log(location)
+        //   console.log(location)
           console.log(loc)
+          const lat = parseInt(loc.coords.latitude, 10);
+          const long = parseInt(loc.coords.longitude, 10);
+          setCurrentLat(lat)
+          setCurrentLong(long)
 
       }
 
@@ -181,10 +173,7 @@ function MyComponent() {
         onClick={ev => {
             console.log("latitide = ", ev.latLng.lat());
             console.log("longitude = ", ev.latLng.lng());
-            //position.lat=ev.latLng.lat();
-            //position.lng=ev.latLng.lng();
-            //position.lat=48.85;
-            //position.lng=2.35;
+            
           }}
       >
         { /* Child components, such as markers, info windows, etc. */ }
@@ -193,17 +182,17 @@ function MyComponent() {
     /></>
       </GoogleMap>
   ) : <></>}
-  <div>
+  <div className="ml-2 mr-2">
       <h3 className="text-lg font-medium text-gray-900 text-center mt-5">Latitude Range</h3>
       <dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-2">
        
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Min Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{minLat}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Max Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{maxLat}</dd>
           </div>
    
       </dl>
@@ -212,11 +201,11 @@ function MyComponent() {
       
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Min Longitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{minLong}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Max Longitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{maxLong}</dd>
           </div>
      
       </dl>
@@ -225,11 +214,11 @@ function MyComponent() {
      
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLat}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLong}</dd>
           </div>
       
       </dl>
@@ -256,6 +245,18 @@ function MyComponent() {
           Verify Proof
         </button>
       </div>
+      {
+        isVerified ? <Link href="/select-nft">
+                    <button
+                        type="button"
+                        className="w-full mt-5 text-center items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        
+                    >
+                    Next
+                    </button>     
+                </Link> : null
+
+    }
   </div>
 
   
