@@ -31,10 +31,6 @@ var center = {
   lng: 2.35
 };
 
-var position ={
-    lat:null,
-    lng:null
-}
 
 function MyComponent() {
 
@@ -51,6 +47,41 @@ function MyComponent() {
   const [mainPublicSignals,setMainPublicSignals] = useState();
   const [isVerified,setIsVerified] = useState(false);
 
+  const [activeMarker, setActiveMarker] = useState(null);
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
+
+  const NFT_1 = [
+    
+    {
+      id: 1,
+      timestamp: "20220719022435",
+      position: { lat: 48.84, lng:2.35 }
+    },
+    {
+      id: 2,
+      timestamp: "20220719022435",
+      position: { lat: 48.85, lng: 2.33 }
+    },
+    {
+      id: 3,
+      timestamp: "20220719022435",
+      position: { lat: 48.8427, lng: 2.345 }
+    },
+    {
+      id: 4,
+      timestamp: "20220719022435",
+      position: { lat: 48.8531, lng: 2.34 }
+    }
+    
+  ];
+  
+  
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -165,7 +196,21 @@ function MyComponent() {
       }
 
       navigator.geolocation.getCurrentPosition(onSuccess,onError)
- 
+  }
+
+  function getLatTarget(){
+    const onSuccess = (loc) => {
+        setMinLat(loc-10)
+        setMaxLat(loc+10)
+        console.log("Target")
+        console.log(minLat)
+        console.log(maxLat)
+        console.log(loc)
+    }
+
+    const onError =()=>{
+        console.log("Could not get Location")
+    }
   }
 
   return (
@@ -173,26 +218,32 @@ function MyComponent() {
 
     {isLoaded ? (
       <GoogleMap
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+        onClick={ev => {
+          console.log("latitide = ", ev.latLng.lat());
+          console.log("longitude = ", ev.latLng.lng());
+          () => setActiveMarker(null)
+          getLatTarget}}
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={4}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        onClick={ev => {
-            console.log("latitide = ", ev.latLng.lat());
-            console.log("longitude = ", ev.latLng.lng());
-            //position.lat=ev.latLng.lat();
-            //position.lng=ev.latLng.lng();
-            //position.lat=48.85;
-            //position.lng=2.35;
-          }}
+        zoom={15}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <><Marker
-      position={position}
-    /></>
+        {NFT_1.map(({ id, name, position }) => (
+          <Marker
+            key={id}
+            position={position}
+            onClick={() => handleActiveMarker(id)}
+          >
+            {activeMarker === id ? (
+              <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                <div>{name}</div>
+              </InfoWindow>
+            ) : null}
+          </Marker>
+        ))}
       </GoogleMap>
-  ) : <></>}
+    ):<></>}
   <div>
       <h3 className="text-lg font-medium text-gray-900 text-center mt-5">Latitude Range</h3>
       <dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-2">
