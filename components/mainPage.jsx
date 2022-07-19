@@ -153,8 +153,9 @@ function MyComponent() {
 
       // Load files and run proof locally
       let DOMAIN = "http://localhost:3000";
-      let wasmBuff = await getFileBuffer(`${DOMAIN}/inRange.wasm`);
-      let zkeyBuff = await getFileBuffer(`${DOMAIN}/inRange.zkey`);
+      let VERCEL_DOMAIN ="https://daordinate-three.vercel.app/";
+      let wasmBuff = await getFileBuffer(`${VERCEL_DOMAIN}/inRange.wasm`);
+      let zkeyBuff = await getFileBuffer(`${VERCEL_DOMAIN}/inRange.zkey`);
     
       let input = {
           "latitudeRange": [ parseInt(minLat), parseInt(maxLat)],
