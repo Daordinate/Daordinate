@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { connect, getStarknet } from "get-starknet";
-import {useState} from 'react';
+import {useState ,useEffect} from 'react';
 
 
 const user = {
@@ -60,6 +60,26 @@ export const AppHeader=() => {
       .catch(err => console.error(err));
       
 }
+
+
+async function checkConnection(){
+  try {
+    // const wallet = await connect({
+    //     include: ["braavos"],
+    // });
+   
+    const wallet2 = getStarknet();
+
+    const address = wallet2.account.address;
+    console.log(address);
+} catch {
+    console.log("Connect Wallet")
+}
+}
+useEffect(() => {
+  checkConnection();
+    
+},[])
   return (
     <>
       

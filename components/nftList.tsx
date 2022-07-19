@@ -1,20 +1,5 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { CreditCardIcon, KeyIcon, UserCircleIcon, UserGroupIcon, ViewGridAddIcon } from '@heroicons/react/outline'
+import {useRouter} from "next/router"
 
 const navigation = [
   { name: 'NFT', href: '#', icon: UserCircleIcon, current: true },
@@ -27,6 +12,36 @@ function classNames(...classes :any) {
 }
 
 export const  NftList=() => {
+    const router = useRouter();
+
+    const {
+      query:{
+        minLat,
+        maxLat,
+        minLong,
+        maxLong,
+        currentLat,
+        currentLong
+    }
+    } = router;
+  
+    const props ={
+      minLat,
+      maxLat,
+      minLong,
+      maxLong,
+      currentLat,
+      currentLong
+    }
+  
+    function showData(){
+      console.log(props)
+      console.log("Min Lat")
+      console.log(minLat)
+      console.log("Max Lat")
+      console.log(maxLat)
+  
+    }
   return (
     <div className="lg:grid lg:grid-cols-12 pl-60 pr-60">
       <aside className="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
@@ -131,11 +146,18 @@ export const  NftList=() => {
             </div>
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
-                type="submit"
+
                 className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
               >
                 Save
               </button>
+              <button
+                className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                onClick={showData}
+              >
+                Show Data
+              </button>
+
             </div>
           </div>
         </form>

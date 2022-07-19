@@ -5,6 +5,7 @@ const snarkjs = require('snarkjs');
 import { connect, getStarknet } from "get-starknet";
 import Link from 'next/link'
 import MapComponent from './maptest.jsx';
+import Router from 'next/router'
 
 
 const containerStyle = {
@@ -54,6 +55,21 @@ function MyComponent() {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
   }, [])
+
+  function sendProps(){
+    Router.push({
+        pathname:"/select-nft",
+        query:{
+            minLat,
+            maxLat,
+            minLong,
+            maxLong,
+            currentLat,
+            currentLong
+        }
+
+    })
+  }
 
 
 
@@ -246,16 +262,15 @@ function MyComponent() {
         </button>
       </div>
       {
-        isVerified ? <Link href="/select-nft">
+        isVerified ? 
                     <button
                         type="button"
                         className="w-full mt-5 text-center items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        
+                        onClick={sendProps}
                     >
                     Next
-                    </button>     
-                </Link> : null
-
+                    </button> : null     
+            
     }
   </div>
 
