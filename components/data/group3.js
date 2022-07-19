@@ -1,7 +1,8 @@
-export const group1Data = [
+export const group3Data = [
   {
     id:1,
-    group: 'NFT 1',
+    group: 'StarkCC 2022',
+    token: 'STRKCC22',
     date: '14/02/2022',
     latitude: '15.14',
     longitude: '2.15',
@@ -9,7 +10,8 @@ export const group1Data = [
   },
   {
     id:2,
-    group: 'NFT 1',
+    group: 'StarkCC 2022',
+    token: 'STRKCC22',
     date: '14/02/2022',
     latitude: '15.14',
     longitude: '2.15',
@@ -17,7 +19,8 @@ export const group1Data = [
   },
   {
     id:3,
-    group: 'NFT 1',
+    group: 'StarkCC 2022',
+    token: 'STRKCC22',
     date: '14/02/2022',
     latitude: '15.14',
     longitude: '2.15',
@@ -25,7 +28,8 @@ export const group1Data = [
   },
   {
     id:4,
-    group: 'NFT 1',
+    group: 'StarkCC 2022',
+    token: 'STRKCC22',
     date: '14/02/2022',
     latitude: '15.14',
     longitude: '2.15',
