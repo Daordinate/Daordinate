@@ -1,4 +1,21 @@
-# Next.js + Tailwind CSS Example
+# Daordinate 📌
+
+> Coordinate with coordinates
+
+- Connect with fellow community members in your local area
+- Do this without ever sharing your exact location with any third-party using zero-knowledge proofs
+- Organisations, airdrop NFTs to people who attend a specific event or are located in a specific area without them ever having to scan a QR code.
+
+## Tools
+
+- Aspect NFT API: query to get NFT data
+- Bravos: Wallet integration
+- Starknet: NFT (ERC721) tokens
+- Circom: Share proof of location via zero-knowledge
+- Openzeppelin Nile: Contract deployments in [nft-contracts repo](https://github.com/Daordinate/nft-contracts)
+- Next.JS & Vercel: Front end (deployment)
+
+## Next.js + Tailwind CSS Example
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
 
