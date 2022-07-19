@@ -1,10 +1,11 @@
 # Daordinate 📌
-
 > Coordinate with coordinates
 
 - Connect with fellow community members in your local area
 - Do this without ever sharing your exact location with any third-party using zero-knowledge proofs
 - Organisations, airdrop NFTs to people who attend a specific event or are located in a specific area without them ever having to scan a QR code.
+
+Play with the real deal here: https://daordinate-three.vercel.app/
 
 ## Tools
 
