@@ -76,26 +76,26 @@ function MyComponent() {
 
   const NFT_1 = [
     
-    {
-      id: 1,
-      timestamp: "20220719022435",
-      position: { lat: 48.84, lng:2.35 }
-    },
-    {
-      id: 2,
-      timestamp: "20220719022435",
-      position: { lat: 48.85, lng: 2.33 }
-    },
-    {
-      id: 3,
-      timestamp: "20220719022435",
-      position: { lat: 48.8427, lng: 2.345 }
-    },
-    {
-      id: 4,
-      timestamp: "20220719022435",
-      position: { lat: 48.8531, lng: 2.34 }
-    }
+//     {
+//       id: 1,
+//       timestamp: "20220719022435",
+//       position: { lat: 48.84, lng:2.35 }
+//     },
+//     {
+//       id: 2,
+//       timestamp: "20220719022435",
+//       position: { lat: 48.85, lng: 2.33 }
+//     },
+//     {
+//       id: 3,
+//       timestamp: "20220719022435",
+//       position: { lat: 48.8427, lng: 2.345 }
+//     },
+//     {
+//       id: 4,
+//       timestamp: "20220719022435",
+//       position: { lat: 48.8531, lng: 2.34 }
+//     }
     
   ];
   
