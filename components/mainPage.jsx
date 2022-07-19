@@ -184,7 +184,7 @@ function MyComponent() {
 
   async function verifyProof(state , setState ) {
 
-      let vkey = await fetch (`http://localhost:3000/inRange_verification_key.json`).then(res => res.json());
+      let vkey = await fetch (`https://daordinate-three.vercel.app/inRange_verification_key.json`).then(res => res.json());
     
       const verified = await snarkjs.plonk.verify(vkey, mainPublicSignals, mainProof);
     
