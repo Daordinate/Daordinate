@@ -5,6 +5,8 @@ const snarkjs = require('snarkjs');
 import { connect, getStarknet } from "get-starknet";
 import Link from 'next/link'
 import MapComponent from './maptest.jsx';
+import Router from 'next/router'
+
 
 const statsLat = [
   { name: 'Min Longitude', stat: 100},
@@ -55,6 +57,21 @@ function MyComponent() {
     }
     setActiveMarker(marker);
   };
+
+  function sendProps(){
+    Router.push({
+        pathname:"/select-nft",
+        query:{
+            minLat,
+            maxLat,
+            minLong,
+            maxLong,
+            currentLat,
+            currentLong
+        }
+
+    })
+  }
 
   const NFT_1 = [
     
@@ -139,9 +156,9 @@ function MyComponent() {
       let zkeyBuff = await getFileBuffer(`${DOMAIN}/inRange.zkey`);
     
       let input = {
-          "latitudeRange": [ minLat, maxLat],
-          "longitudeRange": [ minLong, maxLong],
-          "currentLocation": [ currentLat, currentLong]
+          "latitudeRange": [ parseInt(minLat), parseInt(maxLat)],
+          "longitudeRange": [ parseInt(minLong), parseInt(maxLong)],
+          "currentLocation": [ parseInt(currentLat), parseInt(currentLong)]
       }
       console.log(input)
     
@@ -151,13 +168,14 @@ function MyComponent() {
         
         setMainProof(proof);
         setMainPublicSignals(publicSignals);
-        console.log(mainProof);
-        console.log(mainPublicSignals);
+        console.log(("Proof Generated"))
+        console.log(proof);
+       
     
       //   setState({...state, proof:proof, publicSignals:publicSignals})
     
       } catch (error) {
-        alert("Proof generation Failed: " + error)
+        alert("Location too far away: Invalid Proof")
       } 
     }
 
@@ -168,7 +186,9 @@ function MyComponent() {
     
       const verified = await snarkjs.plonk.verify(vkey, mainPublicSignals, mainProof);
     
-      console.log(verified)
+      // console.log(verified)
+      setIsVerified(verified)
+      
     
     }
     
@@ -187,7 +207,12 @@ function MyComponent() {
           })
           console.log("Locations")
           console.log(location)
-          console.log(loc)
+    
+
+          const lat =loc.coords.latitude;
+          const long = loc.coords.longitude;
+          setCurrentLat(lat)
+          setCurrentLong(long)
 
       }
 
@@ -221,8 +246,12 @@ function MyComponent() {
       onLoad={onLoad}
       onUnmount={onUnmount}
         onClick={ev => {
-          console.log("latitide = ", ev.latLng.lat());
-          console.log("longitude = ", ev.latLng.lng());
+          setMinLat(ev.latLng.lat());
+          setMaxLat(ev.latLng.lat()+1);
+          setMinLong(ev.latLng.lng());
+          setMaxLong(ev.latLng.lng()+1);
+
+          
           () => setActiveMarker(null)
           getLatTarget}}
         mapContainerStyle={containerStyle}
@@ -244,17 +273,17 @@ function MyComponent() {
         ))}
       </GoogleMap>
     ):<></>}
-  <div>
+  <div className="ml-2 mr-2">
       <h3 className="text-lg font-medium text-gray-900 text-center mt-5">Latitude Range</h3>
       <dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-2">
        
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Min Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{minLat}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Max Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{maxLat}</dd>
           </div>
    
       </dl>
@@ -263,11 +292,11 @@ function MyComponent() {
       
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Min Longitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{minLong}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Max Longitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{maxLong}</dd>
           </div>
      
       </dl>
@@ -276,11 +305,11 @@ function MyComponent() {
      
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">100</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLat}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Latitude</dt>
-            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">150</dd>
+            <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLong}</dd>
           </div>
       
       </dl>
@@ -294,19 +323,31 @@ function MyComponent() {
       <div className="mt-5 grid grid-cols-2 gap-1 sm:grid-cols-2">
         <button
               type="button"
-              className="w-full text-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="ml-1 mr-1 w-full text-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               onClick={generateProof}
           >
           Generate Proof
         </button>
         <button
               type="button"
-              className="w-full text-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="ml-1 mr-2 w-full text-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               onClick={verifyProof}
           >
           Verify Proof
         </button>
+      
       </div>
+      {
+        isVerified ? 
+                    <button
+                        type="button"
+                        className="w-full mt-5 text-center items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={sendProps}
+                    >
+                    Next
+                    </button> : null     
+            
+        }
   </div>
 
   
