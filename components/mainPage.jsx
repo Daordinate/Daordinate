@@ -312,7 +312,7 @@ function MyComponent() {
             <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLat}</dd>
           </div>
           <div className="bg-white shadow rounded-lg overflow-hidden sm:p-6">
-            <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Latitude</dt>
+            <dt className="text-sm font-medium text-gray-500 truncate text-center">Current Longitude</dt>
             <dd className="mt-1 text-3xl font-semibold text-gray-900 text-center">{currentLong}</dd>
           </div>
       
