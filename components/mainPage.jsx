@@ -158,11 +158,17 @@ function MyComponent() {
       let zkeyBuff = await getFileBuffer(`${VERCEL_DOMAIN}/inRange.zkey`);
     
       let input = {
-          "latitudeRange": [ parseInt((parseFloat(minLat) + 1000) * 1000), parseInt((parseFloat(maxLat) + 1000) * 1000)],
-          "longitudeRange": [ parseInt((parseFloat(minLong) + 1000) * 1000), parseInt((parseFloat(maxLong) + 1000) * 1000)], 
-          "currentLocation": [ parseInt((parseFloat(currentLat) + 1000) * 1000), parseInt((parseFloat(currentLong) + 1000) * 1000)]
+          "latitudeRange": [ parseInt(minLat) + 1000, parseInt(maxLat) + 1000],
+          "longitudeRange": [ parseInt(minLong) + 1000, parseInt(maxLong) + 1000],
+          "currentLocation": [ parseInt(currentLat) + 1000, parseInt(currentLong) + 1000]
       }
       
+      // High precision output
+      // let input = {
+      //    "latitudeRange": [ parseInt((parseFloat(minLat) + 1000) * 1000), parseInt((parseFloat(maxLat) + 1000) * 1000)],
+      //    "longitudeRange": [ parseInt((parseFloat(minLong) + 1000) * 1000), parseInt((parseFloat(maxLong) + 1000) * 1000)], 
+      //    "currentLocation": [ parseInt((parseFloat(currentLat) + 1000) * 1000), parseInt((parseFloat(currentLong) + 1000) * 1000)]
+      //}
       console.log(input)
     
       try {
