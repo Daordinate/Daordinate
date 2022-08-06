@@ -7,6 +7,8 @@
 
 Play with the real deal here: https://daordinate-three.vercel.app/
 
+Watch the demo: https://youtu.be/o5UpIUiIiYs
+
 ## Tools
 
 - Aspect NFT API: query to get NFT data
